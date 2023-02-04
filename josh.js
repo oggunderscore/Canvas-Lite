@@ -23,7 +23,6 @@ function clickListener() {
         console.log('text:', firstText);
         console.log('youtube link:', youtubeLink);
     }
-
 }
 
 function youtubeValidate(link){
@@ -34,12 +33,6 @@ function youtubeValidate(link){
         return false;
     }
 }
-
-
-
-
-
-
 
 let term = 5 + 7;
 let deez = "nuts";
