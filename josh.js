@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 Console.log("balls")
 =======
 let submitButton = document.querySelector('#submitbutton');
