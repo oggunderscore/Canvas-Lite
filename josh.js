@@ -78,4 +78,3 @@ let game = {
 }
 
 //alert(game.lv4);
->>>>>>> Stashed changes
