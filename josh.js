@@ -1,5 +1,5 @@
-Console.log("balls")
-=======
+console.log("balls")
+
 let submitButton = document.querySelector('#submitbutton');
 submitButton.addEventListener('click', clickListener);
 
