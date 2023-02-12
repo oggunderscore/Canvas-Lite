@@ -1,11 +1,19 @@
 import { BadgeCheckIcon, ChipIcon } from "@heroicons/react/solid";
 import React from "react";
 import { skills } from "../data";
+const canvasAPI = require('node-canvas-api')
+
+canvasAPI.getSelf()
+  .then(self => console.log(self))
 
 export default function Skills() {
   return (
     <section id="skills">
-      <div className="container px-5 py-10 mx-auto">
+      <p>
+        {canvasAPI.getSelf()
+          .then(self => console.log(self))}
+      </p>
+      {/* <div className="container px-5 py-10 mx-auto">
         <div className="text-center mb-20">
           <ChipIcon className="w-10 inline-block mb-4" />
           <h1 className="sm:text-4xl text-3xl font-medium title-font text-white mb-4">
@@ -24,7 +32,7 @@ export default function Skills() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }
