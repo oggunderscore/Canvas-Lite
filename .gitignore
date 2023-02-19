@@ -24,6 +24,5 @@ yarn-error.log*
 
 .vscode/*
 yarn.lock
-craco.config.js
 package-lock.json
 .env
