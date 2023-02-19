@@ -1,19 +1,26 @@
 import { BadgeCheckIcon, ChipIcon } from "@heroicons/react/solid";
 import React from "react";
 import { skills } from "../data";
+const canvasAPI = require('node-canvas-api')
+
+canvasAPI.getSelf()
+  .then(self => console.log(self))
 
 // This Class is for Kevin
 
 export default function Skills() {
   return (
     <section id="skills">
-
+      <p>
+        {canvasAPI.getSelf()
+          .then(self => console.log(self))}
+      </p>
       {/* Tinker Below */}
-      <div className="container mx-auto flex px-10 py-20 md:flex-row flex-col items-center">
-        <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-          <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">
-            Hi, I'm not Kevin.
-            <br className="hidden lg:inline-block" />
+      {/* <div className="container px-5 py-10 mx-auto">
+        <div className="text-center mb-20">
+          <ChipIcon className="w-10 inline-block mb-4" />
+          <h1 className="sm:text-4xl text-3xl font-medium title-font text-white mb-4">
+            Skills &amp; Knowledge
           </h1>
           <h1 className="title-font 3sm:text-2xl text-3xl mb-4 font-medium text-white">
             Efficient. Motivated. Strategic.
@@ -41,8 +48,7 @@ export default function Skills() {
             src="./coding.svg"
           />
         </div>
-      </div>
-
+      </div> */}
       {/* Tinker Above */}
     </section>
   );
