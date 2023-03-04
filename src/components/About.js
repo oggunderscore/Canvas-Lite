@@ -1,46 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 
 // This class is for Josh
 
-export default function About() {
-  return (
-    <section id="about">
-      {/* Tinker Below */}
-      <div className="container mx-auto flex px-10 py-20 md:flex-row flex-col items-center">
-        <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-          <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">
-            Hi, I'm not Kevin.
-            <br className="hidden lg:inline-block" />
-          </h1>
-          <h1 className="title-font 3sm:text-2xl text-3xl mb-4 font-medium text-white">
-            Efficient. Motivated. Strategic.
-          </h1>
-          <p className="mb-8 leading-relaxed">
-            Fast-learning computer science student ready to demonstrate persistent and appealing efforts with previous experience and skills towards future opportunities.
-          </p>
-          <div className="flex justify-center">
-            <a
-              href="#contact"
-              className="inline-flex text-white bg-green-200 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">
-              Contact Me
-            </a>
-            <a
-              href="#projects"
-              className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg">
-              See My Past Work
-            </a>
-          </div>
-        </div>
-        <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-          <img
-            className="object-cover object-center rounded"
-            alt="hero"
-            src="./coding.svg"
-          />
-        </div>
-      </div>
+function ExampleComponent() {
+  const [inputValue, setInputValue] = useState("");
+  const [displayText, setDisplayText] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
-      {/* Tinker Above */}
-    </section>
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(`Submitting input value: ${inputValue}`);
+    // Do something with the input value here
+    if (inputValue == "This is correct"){
+      setDisplayText(true);
+    }
+    else{
+      window.confirm(`You entered "${inputValue}" in the box! (bad)`)
+    }
+  };
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+    setDisplayText(false);
+  };
+
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div className="flex py-10 items-center justify-center">
+          <input
+            type="text"
+            className="border-2 border-gray-300 p-2 rounded-lg mr-2"
+            placeholder="Enter text here"
+            value={inputValue}
+            onChange={handleInputChange}
+          />
+          <button type="submit" className="bg-blue-500 text-white p-2 rounded-lg">
+            Submit
+          </button>
+        </div>
+        {displayText && (<p className="mt-2 text-center">{`You entered "${inputValue}" (good)`}</p> )}
+      </form>
+      
+      <div class="pl-10 py-20">
+        <p class="flex pr-10 items-center justify-center">Enter 'This is correct' for the correct case, anything else triggers incorrect popup.</p>
+        <h1>the</h1>
+        <h2 class="pl-30">ALIGMENT</h2>
+      </div>
+    </div>
   );
 }
+
+export default ExampleComponent;
