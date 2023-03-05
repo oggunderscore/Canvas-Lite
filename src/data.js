@@ -1,18 +1,30 @@
 export const projects = [
   {
     id: 0,
-    name: "Tesla Discord Bot",
-    quote:
-      ["Created a smart JavaScript application using DiscordJS, TeslaJS, Nodemon, Node.js that allowed Tesla vehicle owners to control car functions remotely",
-        "Features include: open / close windows, open trunk / trunk, remote start, controlling HVAC, real-time information about vehicle status, charging, and security",]
+    name: "CPSC 332",
+    prof: "Peiravi",
+    a_dates:
+      ["March 4, 2023",
+      "March 11, 2023",
+      "March 18, 2023"],
+    q_dates:
+      ["March 7, 2023",
+      "April 4, 2023"],
+    announcements:
+      []
   },
   {
     id: 1,
-    name: "Personal & School Related Projects",
-    quote:
-      ["Constructed a 8-bit computer from scratch utilizing simple logic gates and clocks",
-      "Basic level understanding of Drone Building (ESC, flight controller, transmitter, VTX, motors)",
-      "Made a RGB LED controller using a Raspberry Pi",],
+    name: "MATH 170B",
+    prof: "Teacher",
+    a_dates:
+      ["March 8, 2023",
+      "March 15, 2023",
+      "March 22, 2023"],
+    q_dates:
+      ["March 13, 2023"],
+    announcements:
+      []
   },
 ];
 
