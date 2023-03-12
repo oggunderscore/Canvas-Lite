@@ -8,7 +8,7 @@ const canvasAPI = require("node-canvas-api");
 console.log("Printing process.env");
 console.log(process.env);
 console.log("Printing process.env");
-console.log(process.en.CANVAS_API_TOKEN);
+console.log(process.env.CANVAS_API_TOKEN);
 console.log("Printing process.env");
 console.log(process.env.CANVAS_API_DOMAIN);
 
