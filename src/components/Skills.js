@@ -3,8 +3,8 @@ import React from "react";
 import { skills } from "../data";
 const canvasAPI = require('node-canvas-api')
 
-canvasAPI.getSelf()
-  .then(self => console.log(self))
+// canvasAPI.getSelf()
+//   .then(self => console.log(self))
 
 // This Class is for Kevin
 
