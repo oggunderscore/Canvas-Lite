@@ -19,7 +19,7 @@
 
 
 
-const { startFullertonAPI, getCourses } = require('./fullerton');
+const { startFullertonAPI, getCourses } = require('../../fullerton');
 var cors = require('cors');
 const express = require('express');
 const app = express();
