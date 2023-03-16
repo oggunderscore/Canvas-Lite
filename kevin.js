@@ -15,11 +15,8 @@ async function main() {
     // Loop the courses and display each course name
     //courses.map((course) => console.log("Course: " + course.name));
 
-
-
     let jsonData;
     let courseCount = 0;
-
     for (let x = 0; x < courses.length; x++) {
         if (courses[x].name != null) {
             console.log(courses[x].name);
@@ -34,4 +31,3 @@ async function main() {
 
 console.log(process.env);
 //main();
-

@@ -12,6 +12,7 @@
     "node-canvas-api": "^1.7.3",
     "nodemon": "^2.0.21",
     "react": "^17.0.2",
+    "react-bootstrap": "^2.7.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^2.1.3"
   },
