@@ -31,6 +31,7 @@ startFullertonAPI();
 // Route for handling get request for path /
 exports.handler = async (event, context) => {
     const courses = await getCourses();
+    //const assignments = await getAssignments();
     return {
         statusCode: 200,
         body: JSON.stringify(courses)
