@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Navbar from "./components/Navbar";
@@ -15,13 +15,13 @@ export default function App() {
   // since second parameter is empty array, it will run only once
   useEffect(() => {
     const getCourses = async () => {
-      const courseResponse = await fetch('/api/courses');
+      const courseResponse = await fetch('http://localhost:8888/.netlify/functions/middleware');
       const coursesArray = await courseResponse.json();
       setCourses(coursesArray);
     };
     getCourses();
   }, [])
-  
+
 
   return (
     <main className="text-gray-400 bg-gray-900 body-font">
