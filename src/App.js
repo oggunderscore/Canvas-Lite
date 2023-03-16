@@ -15,7 +15,7 @@ export default function App() {
   // since second parameter is empty array, it will run only once
   useEffect(() => {
     const getCourses = async () => {
-      const courseResponse = await fetch('http://localhost:8888/.netlify/functions/middleware');
+      const courseResponse = await fetch('/.netlify/functions/middleware');
       const coursesArray = await courseResponse.json();
       setCourses(coursesArray);
     };
