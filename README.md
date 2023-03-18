@@ -5,3 +5,9 @@ Canvas Lite is a web app that pulls information through the `node-canvas-api` an
 
 **Windows**: Add `--openssl-legacy-provider` add this to the package.json in scripts/start for `craco start` as a option, then `npm install`
 **Unix / Linux**: No additional steps needed, just `npm install`
+
+###Local development
+
+**Install packages**: `yarn`
+**Start middleware**: `yarn middleware`
+**Start frontend**: `yarn start`

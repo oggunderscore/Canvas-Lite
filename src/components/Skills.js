@@ -6,6 +6,8 @@ import { useState, useEffect } from "react";
 
 export default function About() {
   const [courses, setCourses] = useState([]);
+  // canvasAPI.getSelf()
+  //   .then(self => console.log(self))
 
   useEffect(() => {
     async function fetchCourses() {
