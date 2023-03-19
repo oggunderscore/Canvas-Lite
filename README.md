@@ -11,3 +11,5 @@ Canvas Lite is a web app that pulls information through the `node-canvas-api` an
 **Install packages**: `yarn`
 **Start middleware**: `yarn middleware`
 **Start frontend**: `yarn start`
+
+**Open Netlify Dev Environment**: `ntl dev`
