@@ -1,20 +1,59 @@
-export const projects = [
+export const courses = [
   {
     id: 0,
-    name: "Tesla Discord Bot",
-    quote:
-      ["Created a smart JavaScript application using DiscordJS, TeslaJS, Nodemon, Node.js that allowed Tesla vehicle owners to control car functions remotely",
-        "Features include: open / close windows, open trunk / trunk, remote start, controlling HVAC, real-time information about vehicle status, charging, and security",]
+    name: "CPSC 332",
+    prof: "Peiravi",
+    due_names:
+      ["Assignment 3",
+      "Quiz 2",
+      "Exam 1"
+      ],
+    due_dates:
+      ["March 4, 2023",
+      "March 11, 2023",
+      "March 18, 2023"],
+    announcements:
+      ["Exam 1 Study Guide"],
+    a_post_dates:
+      ["March 12, 2023"],
   },
   {
     id: 1,
-    name: "Personal & School Related Projects",
-    quote:
-      ["Constructed a 8-bit computer from scratch utilizing simple logic gates and clocks",
-      "Basic level understanding of Drone Building (ESC, flight controller, transmitter, VTX, motors)",
-      "Made a RGB LED controller using a Raspberry Pi",],
+    name: "MATH 170B",
+    prof: "Teacher",
+    due_names:
+      ["HW 4",
+      "HW 5",
+      "HW 6"],
+    due_dates:
+      ["March 8, 2023",
+      "March 15, 2023",
+      "March 22, 2023"],
+    q_dates:
+      ["March 13, 2023"],
+    announcements:
+      ["Exam coming up!"],
+    a_post_dates:
+      ["March 19, 2023"],
   },
 ];
+
+export default function is14DaysAgo(date) {
+  // let month = "";
+
+  // for(let i = 0; i < date.length, i++;)
+  // {
+  //   month.concat(date[i]);
+  // }
+  // switch (month) {
+  //   case "January": 
+  // }
+
+  let today = new Date();
+  let annDate = new Date(date);
+
+  return annDate;
+}
 
 export const experience = [
   {
