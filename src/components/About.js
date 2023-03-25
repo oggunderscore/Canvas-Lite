@@ -48,7 +48,7 @@ function ExampleComponent() {
             color: black;
           }
           .loaded-button {
-            background-color: lime
+            background-color: #69bb55
           }
           .placeholder-bg::placeholder {
             color: #7286b5;
@@ -74,7 +74,7 @@ function ExampleComponent() {
               </div>
             ) : isLoaded ? (
               <div className="flex items-center">
-                <span className={`ml-2 loaded-text`}>✓ Loaded!</span>
+                <span className={`ml-2 loaded-text`}>✓ Loaded</span>
               </div>
             ) : (
               "Submit"
