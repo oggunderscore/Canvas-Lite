@@ -4,30 +4,16 @@ import { courses } from "../data";
 
 // This Class is for Logan
 
-let dueDates = "";
-let annDates = "";
+let dueDates = [];
+let annDates = [];
 
 for (let i = 0; i < courses.length; i++) {
   const course = courses[i];
   for(let j = 0; j < course.due_names.length; j++){
-    // if(j === 0){
-    //   dueDates = course.name + " - " + course.due_names[0] + " - " + course.due_dates[0] + "\n";
-    //   // console.log(j);
-    // }
-    // else{
-      dueDates = dueDates + course.name + " - " + course.due_names[j] + " - " + course.due_dates[j] + "\u00A0";
-      // console.log(j);
-    // }
+      dueDates.push(course.name + " - " + course.due_names[j] + " - " + course.due_dates[j] + "\n");
   }
   for(let k = 0; k < course.announcements.length; k++){
-    // if(k === 0){
-    //   annDates = course.name + " - " + course.announcements[0] + " - " + course.a_post_dates[0] + "\n"
-    //   // console.log(k);
-    // }
-    // else{
-      annDates = annDates + course.name + " - " + course.announcements[k] + " - " + course.a_post_dates[k] + "\u00A0";
-      // console.log(k);
-    // }
+      annDates.push(course.name + " - " + course.announcements[k] + " - " + course.a_post_dates[k] + "\n");
   }
 }
 
@@ -40,15 +26,29 @@ export default function Projects() {
           <h1 className="title-font 3sm:text-2xl text-3xl mb-4 font-medium text-white">
             Upcoming Due Dates
           </h1>
-          <p className="mb-8 leading-relaxed">
-            {dueDates}
-          </p>
+          {/* <p className="mb-8 leading-relaxed">
+            {dueDates[0]}
+          </p> */}
+          <ul>
+            {
+              dueDates.map((item, index) =>
+                <li key={index}>{item}</li>
+              )
+            }
+          </ul>
           <h1 className="title-font 3sm:text-2xl text-3xl mb-4 font-medium text-white">
             Past 14 Days Announcements
           </h1>
-          <p className="mb-8 leading-relaxed">
-            {annDates}
-          </p>
+          {/* <p className="mb-8 leading-relaxed">
+            {annDates[0]}
+          </p> */}
+          <ul>
+            {
+              annDates.map((item, index) =>
+                <li key={index}>{item}</li>
+              )
+            }
+          </ul>
         </div>
       </div>
       {/* Tinker Above */}
