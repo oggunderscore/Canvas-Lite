@@ -1,6 +1,7 @@
 import { CodeIcon } from "@heroicons/react/solid";
 import React from "react";
 import { courses } from "../data";
+import { toDateStringBetter } from "../data"
 
 // This Class is for Logan
 
@@ -10,10 +11,10 @@ let annDates = [];
 for (let i = 0; i < courses.length; i++) {
   const course = courses[i];
   for(let j = 0; j < course.due_names.length; j++){
-      dueDates.push(course.name + " - " + course.due_names[j] + " - " + course.due_dates[j] + "\n");
+      dueDates.push(course.name + " - " + course.due_names[j] + " - " + toDateStringBetter(course.due_dates[j]));
   }
   for(let k = 0; k < course.announcements.length; k++){
-      annDates.push(course.name + " - " + course.announcements[k] + " - " + course.a_post_dates[k] + "\n");
+      annDates.push(course.name + " - " + course.announcements[k] + " - " + toDateStringBetter(course.a_post_dates[k]));
   }
 }
 
@@ -35,7 +36,7 @@ export default function Projects() {
               }
             </ol>
           </div>
-          <div className="py-5">
+          <div className="py-10">
             <h1 className="title-font 3sm:text-2xl text-3xl mb-4 font-medium text-white">
               Past 14 Days Announcements
             </h1>
