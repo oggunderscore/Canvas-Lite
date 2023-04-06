@@ -1,54 +1,108 @@
-export const courses = [
+// export const courses = [
+//   {
+//     id: 0,
+//     name: "CPSC 332",
+//     prof: "Peiravi",
+//     due_names:
+//       ["Assignment 3",
+//       "Quiz 2",
+//       "Exam 1"
+//       ],
+//     due_dates_string:
+//       ["March 4, 2023",
+//       "March 11, 2023",
+//       "March 18, 2023"],
+//     due_dates:
+//       [new Date(2023, 2, 4, 0, 0, 0, 0),
+//       new Date(2023, 2, 11, 0, 0, 0, 0),
+//       new Date(2023, 2, 18, 0, 0, 0, 0)],
+//     announcements:
+//       ["Exam 1 Study Guide"],
+//     a_post_dates_str:
+//       ["March 12, 2023"],
+//     a_post_dates:
+//       [new Date(2023, 2, 12, 0, 0, 0, 0)],
+//   },
+//   {
+//     id: 1,
+//     name: "MATH 170B",
+//     prof: "Teacher",
+//     due_names:
+//       ["HW 4",
+//       "HW 5",
+//       "HW 6"],
+//     due_dates_string:
+//       ["March 8, 2023",
+//       "March 15, 2023",
+//       "March 22, 2023"],
+//     due_dates:
+//       [new Date(2023, 2, 8, 0, 0, 0, 0),
+//       new Date(2023, 2, 15, 0, 0, 0, 0),
+//       new Date(2023, 2, 22, 0, 0, 0, 0)],
+//     q_dates:
+//       ["March 13, 2023"],
+//     announcements:
+//       ["Exam coming up!"],
+//     a_post_dates_str:
+//       ["March 19, 2023"],
+//     a_post_dates:
+//       [new Date(2023, 2, 19, 0, 0, 0, 0)],
+//   },
+// ];
+
+export const assignments = [
   {
     id: 0,
-    name: "CPSC 332",
-    prof: "Peiravi",
-    due_names:
-      ["Assignment 3",
-      "Quiz 2",
-      "Exam 1"
-      ],
-    due_dates_string:
-      ["March 4, 2023",
-      "March 11, 2023",
-      "March 18, 2023"],
-    due_dates:
-      [new Date(2023, 2, 4, 0, 0, 0, 0),
-      new Date(2023, 2, 11, 0, 0, 0, 0),
-      new Date(2023, 2, 18, 0, 0, 0, 0)],
-    announcements:
-      ["Exam 1 Study Guide"],
-    a_post_dates_str:
-      ["March 12, 2023"],
-    a_post_dates:
-      [new Date(2023, 2, 12, 0, 0, 0, 0)],
+    parent_course: "CPSC 332",
+    name: "Assignment 3",
+    due_date: new Date(2023, 2, 4, 0, 0, 0, 0)
   },
   {
     id: 1,
-    name: "MATH 170B",
-    prof: "Teacher",
-    due_names:
-      ["HW 4",
-      "HW 5",
-      "HW 6"],
-    due_dates_string:
-      ["March 8, 2023",
-      "March 15, 2023",
-      "March 22, 2023"],
-    due_dates:
-      [new Date(2023, 2, 8, 0, 0, 0, 0),
-      new Date(2023, 2, 15, 0, 0, 0, 0),
-      new Date(2023, 2, 22, 0, 0, 0, 0)],
-    q_dates:
-      ["March 13, 2023"],
-    announcements:
-      ["Exam coming up!"],
-    a_post_dates_str:
-      ["March 19, 2023"],
-    a_post_dates:
-      [new Date(2023, 2, 19, 0, 0, 0, 0)],
+    parent_course: "MATH 170B",
+    name: "HW 4",
+    due_date: new Date(2023, 2, 8, 0, 0, 0, 0)
   },
-];
+  {
+    id: 2,
+    parent_course: "CPSC 332",
+    name: "Quiz 2",
+    due_date: new Date(2023, 2, 11, 0, 0, 0, 0)
+  },
+  {
+    id: 3,
+    parent_course: "MATH 170B",
+    name: "HW 5",
+    due_date: new Date(2023, 2, 15, 0, 0, 0, 0)
+  },
+  {
+    id: 4,
+    parent_course: "CPSC 332",
+    name: "Exam 1",
+    due_date: new Date(2023, 2, 18, 0, 0, 0, 0)
+  },
+  {
+    id: 5,
+    parent_course: "MATH 170B",
+    name: "HW 6",
+    due_date: new Date(2023, 2, 22, 0, 0, 0, 0)
+  },
+]
+
+export const announcements = [
+  {
+    id: 0,
+    parent_course: "MATH 170B",
+    name: "Exam coming up!",
+    post_date: new Date(2023, 2, 19, 0, 0, 0, 0)
+  },
+  {
+    id: 1,
+    parent_course: "CPSC 332",
+    name: "Exam 1 Study Guide",
+    post_date: new Date(2023, 2, 12, 0, 0, 0, 0)
+  }
+]
 
 export function toDateStringBetter(in_date) {
   let text = "";

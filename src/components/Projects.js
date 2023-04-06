@@ -1,21 +1,18 @@
 import { CodeIcon } from "@heroicons/react/solid";
 import React from "react";
-import { courses } from "../data";
-import { toDateStringBetter } from "../data"
+import { assignments, announcements, toDateStringBetter } from "../data";
+import {  } from "../data"
 
 // This Class is for Logan
 
 let dueDates = [];
 let annDates = [];
 
-for (let i = 0; i < courses.length; i++) {
-  const course = courses[i];
-  for(let j = 0; j < course.due_names.length; j++){
-      dueDates.push(course.name + " - " + course.due_names[j] + " - " + toDateStringBetter(course.due_dates[j]));
-  }
-  for(let k = 0; k < course.announcements.length; k++){
-      annDates.push(course.name + " - " + course.announcements[k] + " - " + toDateStringBetter(course.a_post_dates[k]));
-  }
+for(let i = 0; i < assignments.length; i++){
+    dueDates.push(assignments[i].parent_course + " - " + assignments[i].name + " - " + toDateStringBetter(assignments[i].due_date));
+}
+for(let j = 0; j < announcements.length; j++){
+    annDates.push(announcements[j].parent_course + " - " + announcements[j].name + " - " + toDateStringBetter(announcements[j].post_date));
 }
 
 export default function Projects() {
