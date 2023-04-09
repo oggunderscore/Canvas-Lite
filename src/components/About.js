@@ -1,13 +1,17 @@
 import React, { useState } from "react";
+import { useAppData } from "../context/AppProvider";
+
 
 // This class is for Josh
 
 function ExampleComponent() {
+  const { courses } = useAppData();
   const [inputValue, setInputValue] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(`Submitting input value: ${inputValue}`);
+    console.log(courses[0].name);
     // Do something with the input value here
     window.confirm(`You entered "${inputValue}" in the box!`)
   };
