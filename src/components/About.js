@@ -5,20 +5,32 @@ function ExampleComponent() {
   const [displayText, setDisplayText] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoaded, setLoaded] = useState(false);
+  const [isBadLoaded, setBadLoaded] = useState(false);
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    setIsLoading(true);
-    setLoaded(false);
-
+    if (inputValue === "") {
+      alert("Please enter a value!");
+    } else {
+      event.preventDefault();
+      setIsLoading(true);
+      setLoaded(false);
+    }
+  
     setTimeout(() => {
       console.log(`Submitting input value: ${inputValue}`);
-      if (inputValue === "This is correct") {
+      if (inputValue === "good") {
         setDisplayText(true);
+      } else if (inputValue === "bad") {
+        setDisplayText(true);
+        setBadLoaded(true);
+  
+        setTimeout(() => {
+          setLoaded(false);
+          setBadLoaded(false);
+        }, 2000);
+        
       } else {
-        const confirmed = window.confirm(
-          `You entered "${inputValue}" in the box! (bad)`
-        );
+        const confirmed = window.confirm(`You entered "${inputValue}" in the box!`);
         setInputValue("");
         if (confirmed) {
           // do something if the user clicked "OK"
@@ -26,6 +38,7 @@ function ExampleComponent() {
           // do something if the user clicked "Cancel"
         }
       }
+  
       setIsLoading(false);
       setLoaded(true);
     }, 2000);
@@ -50,6 +63,9 @@ function ExampleComponent() {
           .loaded-button {
             background-color: #69bb55
           }
+          .bad-button {
+            background-color: #bb5555
+          }
           .placeholder-bg::placeholder {
             color: #7286b5;
           }`}
@@ -65,12 +81,16 @@ function ExampleComponent() {
           />
           <button
             type="submit"
-            className={`bg-blue-500 text-white p-2 rounded-lg ${isLoading ? "active-button" : ""} ${isLoaded ? "loaded-button" : ""}`}
+            className={`bg-blue-500 text-white p-2 rounded-lg ${isLoading ? "active-button" : ""} ${(!isBadLoaded && isLoaded) ? "loaded-button" : ""} ${(isBadLoaded && isLoaded) ? "bad-button" : ""}`}
           >
             {isLoading && !isLoaded ? (
               <div className="flex items-center">
                 <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
                 <span className="ml-2">Loading...</span>
+              </div>
+            ) : isBadLoaded ? (
+              <div className="flex items-center">
+                <span className={`ml-2 loaded-text`}>✕ Failed</span>
               </div>
             ) : isLoaded ? (
               <div className="flex items-center">
@@ -88,8 +108,7 @@ function ExampleComponent() {
 
       <div className="pl-10 py-20">
         <p className="flex pr-10 items-center justify-center">
-          Enter 'This is correct' for the correct case, anything else triggers
-          incorrect popup.
+          Enter 'good' for the correct case, 'bad' for incorrect, nothing for empty.
         </p>
         <h1>the</h1>
         <h2 className="pl-30">ALIGNMENT</h2>
