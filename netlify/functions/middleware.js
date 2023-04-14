@@ -10,13 +10,10 @@ startFullertonAPI();
 // Route for handling get request for path /
 exports.handler = async (event, context) => {
     const courses = await getCourses();
-    // console.log(courses[0]);
-    // console.log("ID: ");
-    // console.log(courses[0].id);
-    const assignments = await getAssignments(courses[0].id);
-    const ca = { courses, assignments };
+    const assignments = await getAssignments(courses[0].id); // Need to figure out how to nest this? 
+    const bundle = { courses, assignments };
     return {
         statusCode: 200,
-        body: JSON.stringify(ca)
+        body: JSON.stringify(bundle)
     };
 };
