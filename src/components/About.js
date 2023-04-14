@@ -20,23 +20,16 @@ function ExampleComponent() {
       console.log(`Submitting input value: ${inputValue}`);
       if (inputValue === "good") {
         setDisplayText(true);
-      } else if (inputValue === "bad") {
+      } else {
         setDisplayText(true);
         setBadLoaded(true);
   
         setTimeout(() => {
           setLoaded(false);
           setBadLoaded(false);
+          setInputValue("");
         }, 2000);
         
-      } else {
-        const confirmed = window.confirm(`You entered "${inputValue}" in the box!`);
-        setInputValue("");
-        if (confirmed) {
-          // do something if the user clicked "OK"
-        } else {
-          // do something if the user clicked "Cancel"
-        }
       }
   
       setIsLoading(false);
@@ -78,6 +71,7 @@ function ExampleComponent() {
             placeholder="Enter text here"
             value={inputValue}
             onChange={handleInputChange}
+            style={{width: "275px"}}
           />
           <button
             type="submit"
