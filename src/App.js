@@ -10,7 +10,7 @@ import { useAppData } from "./context/AppProvider";
 
 export default function App() {
   // Initialize courses to empty array - that is the courses state of the component
-  const { courses, onCoursesChange, assignments, onAssignmentsChange} = useAppData();
+  const { courses, onCoursesChange, assignments, onAssignmentsChange } = useAppData();
   //const [assignments, setAssignments] = useState([]);
 
   // useEffect = redo this function everytime something changes in the second parameter

@@ -8,21 +8,20 @@ import { useAppData } from "../context/AppProvider";
 export default function About() {
   const { courses, assignments } = useAppData();
 
+  console.log(courses);
 
   return (
     <section id="about">
       <div>
         <h2>Courses</h2>
+        <br />
         <ul>
-          {courses.map((item) => (
-            <li key={item.id}>{item.name}</li>
+          {courses.map((course, index) => (
+            <li key={course.id}>{course.name} Assignments:
+              {course.assignments.map((assn) => <li key={assn.id}>{assn.name}</li>)}
+            </li>
           ))}
-        </ul>
-        <h2>Assignments</h2>
-        <ul>
-          {assignments.map((item) => (
-            <li key={item.id}>{item.name}</li>
-          ))}
+
         </ul>
       </div>
     </section>

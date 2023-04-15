@@ -18,4 +18,5 @@ async function getAssignments(courseID) {
     return assignments;
 }
 
+
 module.exports = { startFullertonAPI, getCourses, getAssignments };
