@@ -1,34 +1,16 @@
-import { CodeIcon } from "@heroicons/react/solid";
 import React from "react";
-import { courses } from "../data";
+import { assignments, announcements, toDateStringBetter } from "../data";
 
 // This Class is for Logan
 
-let dueDates = "";
-let annDates = "";
+let dueDates = [];
+let annDates = [];
 
-for (let i = 0; i < courses.length; i++) {
-  const course = courses[i];
-  for(let j = 0; j < course.due_names.length; j++){
-    // if(j === 0){
-    //   dueDates = course.name + " - " + course.due_names[0] + " - " + course.due_dates[0] + "\n";
-    //   // console.log(j);
-    // }
-    // else{
-      dueDates = dueDates + course.name + " - " + course.due_names[j] + " - " + course.due_dates[j] + "\u00A0";
-      // console.log(j);
-    // }
-  }
-  for(let k = 0; k < course.announcements.length; k++){
-    // if(k === 0){
-    //   annDates = course.name + " - " + course.announcements[0] + " - " + course.a_post_dates[0] + "\n"
-    //   // console.log(k);
-    // }
-    // else{
-      annDates = annDates + course.name + " - " + course.announcements[k] + " - " + course.a_post_dates[k] + "\u00A0";
-      // console.log(k);
-    // }
-  }
+for(let i = 0; i < assignments.length; i++){
+    dueDates.push(assignments[i].parent_course + " - " + assignments[i].name + " - " + toDateStringBetter(assignments[i].due_date));
+}
+for(let j = 0; j < announcements.length; j++){
+    annDates.push(announcements[j].parent_course + " - " + announcements[j].name + " - " + toDateStringBetter(announcements[j].post_date));
 }
 
 export default function Projects() {
@@ -40,15 +22,25 @@ export default function Projects() {
           <h1 className="title-font 3sm:text-2xl text-3xl mb-4 font-medium text-white">
             Upcoming Due Dates
           </h1>
-          <p className="mb-8 leading-relaxed">
-            {dueDates}
-          </p>
-          <h1 className="title-font 3sm:text-2xl text-3xl mb-4 font-medium text-white">
-            Past 14 Days Announcements
-          </h1>
-          <p className="mb-8 leading-relaxed">
-            {annDates}
-          </p>
+          <ol className="px-4" style={{listStyleType: 'disc'}}>
+            {
+              dueDates.map((item, index) =>
+                <li key={index}>{item}</li>
+              )
+            }
+          </ol>
+          {/* <div className="py-10">
+            <h1 className="title-font 3sm:text-2xl text-3xl mb-4 font-medium text-white">
+              Past 14 Days Announcements
+            </h1>
+            <ol className="px-4" style={{listStyleType: 'disc'}}>
+              {
+                annDates.map((item, index) =>
+                  <li key={index}>{item}</li>
+                )
+              }
+            </ol>
+          </div> */}
         </div>
       </div>
       {/* Tinker Above */}
