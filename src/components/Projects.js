@@ -1,19 +1,23 @@
 import React from "react";
 import { assignments, announcements, toDateStringBetter } from "../data";
+import { useAppData } from "../context/AppProvider";
 
 // This Class is for Logan
 
-let dueDates = [];
-let annDates = [];
-
-for(let i = 0; i < assignments.length; i++){
-    dueDates.push(assignments[i].parent_course + " - " + assignments[i].name + " - " + toDateStringBetter(assignments[i].due_date));
-}
-for(let j = 0; j < announcements.length; j++){
-    annDates.push(announcements[j].parent_course + " - " + announcements[j].name + " - " + toDateStringBetter(announcements[j].post_date));
-}
-
 export default function Projects() {
+
+  const { courses } = useAppData();
+
+  let dueDates = [];
+  let annDates = [];
+
+  for(let i = 0; i < assignments.length; i++){
+      dueDates.push(assignments[i].parent_course + " - " + assignments[i].name + " - " + toDateStringBetter(assignments[i].due_date));
+  }
+  for(let j = 0; j < announcements.length; j++){
+      annDates.push(announcements[j].parent_course + " - " + announcements[j].name + " - " + toDateStringBetter(announcements[j].post_date));
+  }
+
   return (
     <section id="projects">
       {/* Tinker Below */}
