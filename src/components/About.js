@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useAppData } from "../context/AppProvider";
+
 
 function ExampleComponent() {
   const [inputValue, setInputValue] = useState("");

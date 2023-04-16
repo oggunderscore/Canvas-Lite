@@ -13,9 +13,10 @@ async function getCourses() {
     return courses;
 }
 
-// async function getAssignments() {
-//     const assignments = await canvasAPI.getAssignments(myId);
-//     return assignments;
-// }
+async function getAssignments(courseID) {
+    const assignments = await canvasAPI.getAssignments(courseID);
+    return assignments;
+}
 
-module.exports = { startFullertonAPI, getCourses };
+
+module.exports = { startFullertonAPI, getCourses, getAssignments };
