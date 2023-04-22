@@ -8,6 +8,7 @@ function ExampleComponent() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoaded, setLoaded] = useState(false);
   const [isBadLoaded, setBadLoaded] = useState(false);
+  const { token, onTokenChange } = useAppData();
 
   const handleSubmit = (event) => {
     if (inputValue === "") {
@@ -16,8 +17,9 @@ function ExampleComponent() {
       event.preventDefault();
       setIsLoading(true);
       setLoaded(false);
+      onTokenChange(inputValue); // This is where we call to useEffect and fetch a response
     }
-  
+
     setTimeout(() => {
       console.log(`Submitting input value: ${inputValue}`);
       if (inputValue === "good") {
@@ -25,15 +27,15 @@ function ExampleComponent() {
       } else {
         setDisplayText(true);
         setBadLoaded(true);
-  
+
         setTimeout(() => {
           setLoaded(false);
           setBadLoaded(false);
           setInputValue("");
         }, 2000);
-        
+
       }
-  
+
       setIsLoading(false);
       setLoaded(true);
     }, 2000);
@@ -73,7 +75,7 @@ function ExampleComponent() {
             placeholder="Enter text here"
             value={inputValue}
             onChange={handleInputChange}
-            style={{width: "275px"}}
+            style={{ width: "275px" }}
           />
           <button
             type="submit"
@@ -101,14 +103,6 @@ function ExampleComponent() {
           <p className="mt-2 text-center">{`You entered "${inputValue}" (good)`}</p>
         )}
       </form>
-
-      <div className="pl-10 py-20">
-        <p className="flex pr-10 items-center justify-center">
-          Enter 'good' for the correct case, 'bad' for incorrect, nothing for empty.
-        </p>
-        <h1>the</h1>
-        <h2 className="pl-30">ALIGNMENT</h2>
-      </div>
     </div>
   );
 }
