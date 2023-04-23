@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAppData } from "../context/AppProvider";
 
 
@@ -8,37 +8,68 @@ function ExampleComponent() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoaded, setLoaded] = useState(false);
   const [isBadLoaded, setBadLoaded] = useState(false);
-  const { token, onTokenChange } = useAppData();
+  const { courses, onCoursesChange, assignments, onAssignmentsChange, token, onTokenChange } = useAppData();
+
+  // useEffect = redo this function everytime something changes in the second parameter
+  useEffect(() => {
+    const fetchInfo = async () => {
+      if (token != '') {
+        console.log("Fetching with token: " + token);
+
+        // Make it loading symbol
+        setIsLoading(true);
+        setLoaded(false);
+
+        console.log("FETCHING NOW");
+
+        try {
+          const response = await fetch('/.netlify/functions/middleware', {
+            method: 'GET',
+            headers: {
+              'CANVAS_API_TOKEN': token,
+            }
+          });
+
+          if (response.ok) {
+            console.log("GOOD RESPONSE");
+            setDisplayText(true);
+            setIsLoading(false);
+            setLoaded(true);
+
+            const responseJson = await response.json();
+            onCoursesChange(responseJson.courses);
+            onAssignmentsChange(responseJson.assignments);
+          } else if (!response.ok) {
+            console.log("BAD RESPONSE");
+            setDisplayText(true);
+            setBadLoaded(true);
+
+            setTimeout(() => {
+              setLoaded(false);
+              setBadLoaded(false);
+              setInputValue("");
+            }, 2000);
+
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
+    fetchInfo();
+  }, [token]);
+
+
 
   const handleSubmit = (event) => {
     if (inputValue === "") {
-      alert("Please enter a value!");
+      alert("Please enter a valid key!");
     } else {
       event.preventDefault();
       setIsLoading(true);
       setLoaded(false);
       onTokenChange(inputValue); // This is where we call to useEffect and fetch a response
     }
-
-    setTimeout(() => {
-      console.log(`Submitting input value: ${inputValue}`);
-      if (inputValue === "good") {
-        setDisplayText(true);
-      } else {
-        setDisplayText(true);
-        setBadLoaded(true);
-
-        setTimeout(() => {
-          setLoaded(false);
-          setBadLoaded(false);
-          setInputValue("");
-        }, 2000);
-
-      }
-
-      setIsLoading(false);
-      setLoaded(true);
-    }, 2000);
   };
 
   const handleInputChange = (event) => {
@@ -79,7 +110,7 @@ function ExampleComponent() {
           />
           <button
             type="submit"
-            className={`bg-blue-500 text-white p-2 rounded-lg ${isLoading ? "active-button" : ""} ${(!isBadLoaded && isLoaded) ? "loaded-button" : ""} ${(isBadLoaded && isLoaded) ? "bad-button" : ""}`}
+            className={`bg-blue-500 text-white p-2 pr-4 text-center rounded-lg ${isLoading ? "active-button" : ""} ${(!isBadLoaded && isLoaded) ? "loaded-button" : ""} ${(isBadLoaded && isLoaded) ? "bad-button" : ""}`}
           >
             {isLoading && !isLoaded ? (
               <div className="flex items-center">
@@ -99,9 +130,6 @@ function ExampleComponent() {
             )}
           </button>
         </div>
-        {displayText && (
-          <p className="mt-2 text-center">{`You entered "${inputValue}" (good)`}</p>
-        )}
       </form>
     </div>
   );
