@@ -8,7 +8,7 @@ function ExampleComponent() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoaded, setLoaded] = useState(false);
   const [isBadLoaded, setBadLoaded] = useState(false);
-  const { courses, onCoursesChange, assignments, onAssignmentsChange, token, onTokenChange } = useAppData();
+  let { courses, onCoursesChange, assignments, onAssignmentsChange, token, onTokenChange } = useAppData();
 
   // useEffect = redo this function everytime something changes in the second parameter
   useEffect(() => {
@@ -23,7 +23,7 @@ function ExampleComponent() {
         console.log("FETCHING NOW");
 
         try {
-          const response = await fetch('/.netlify/functions/middleware', {
+          let response = await fetch('/.netlify/functions/middleware', {
             method: 'GET',
             headers: {
               'CANVAS_API_TOKEN': token,
@@ -35,13 +35,16 @@ function ExampleComponent() {
             setDisplayText(true);
             setIsLoading(false);
             setLoaded(true);
+            setInputValue("");
 
-            const responseJson = await response.json();
+            let responseJson = await response.json();
             onCoursesChange(responseJson.courses);
             onAssignmentsChange(responseJson.assignments);
           } else if (!response.ok) {
             console.log("BAD RESPONSE");
             setDisplayText(true);
+            setIsLoading(false);
+            setLoaded(true);
             setBadLoaded(true);
 
             setTimeout(() => {
@@ -52,6 +55,7 @@ function ExampleComponent() {
 
           }
         } catch (error) {
+          console.log("ERROR CAUGHT:");
           console.log(error);
         }
       }

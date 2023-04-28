@@ -3,9 +3,9 @@ import React, { createContext, useContext, useState } from 'react';
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const [courses, setCourses] = useState([]);
-  const [assignments, setAssignments] = useState([]);
-  const [token, setToken] = useState([]);
+  let [courses, setCourses] = useState([]);
+  let [assignments, setAssignments] = useState([]);
+  let [token, setToken] = useState([]);
 
   return (
     <AppContext.Provider value={{ courses, setCourses, assignments, setAssignments, token, setToken }}>
@@ -15,9 +15,9 @@ const AppProvider = ({ children }) => {
 };
 
 const useAppData = () => {
-  const { courses, setCourses } = useContext(AppContext);
-  const { assignments, setAssignments } = useContext(AppContext);
-  const { token, setToken } = useContext(AppContext);
+  let { courses, setCourses } = useContext(AppContext);
+  let { assignments, setAssignments } = useContext(AppContext);
+  let { token, setToken } = useContext(AppContext);
 
   const handleCourseChange = (newCourses) => setCourses(newCourses);
   const handleAssignmentChange = (newAssignments) => setAssignments(newAssignments);
