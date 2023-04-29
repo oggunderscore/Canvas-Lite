@@ -104,49 +104,62 @@ export const announcements = [
   }
 ]
 
-export function toDateStringBetter(in_date) {
-  let text = "";
-  let month = "";
-  text = in_date.toDateString();
-  text = text.slice(4, 10) + "," + text.slice(10, 15);
-  month = text.slice(0, 3);
-  switch(month) {
-    case "Jan":
-      month = "January";
-      break;
-    case "Feb":
-      month = "February";
-      break;
-    case "Mar":
-      month = "March";
-      break;
-    case "Apr":
-      month = "April";
-      break;
-    case "Jun":
-      month = "June";
-      break;
-    case "Jul":
-      month = "July";
-      break;
-    case "Aug":
-      month = "August";
-      break;
-    case "Sep":
-      month = "September";
-      break;
-    case "Oct":
-      month = "October";
-      break;
-    case "Nov":
-      month = "November";
-      break;
-    case "Dec":
-      month = "December";
-      break;
+export function makeCanvasDateReadable(in_date) {
+  if(in_date) {
+    let text = "";
+    
+    in_date = in_date.slice(0, 10);
+
+    let month = in_date.slice(5, 7);
+    let day = in_date.slice(8, 10);
+    let year = in_date.slice(0, 4);
+
+    switch(month) {
+      case "01":
+        month = "January";
+        break;
+      case "02":
+        month = "February";
+        break;
+      case "03":
+        month = "March";
+        break;
+      case "04":
+        month = "April";
+        break;
+      case "05":
+        month = "May";
+        break;
+      case "06":
+        month = "June";
+        break;
+      case "07":
+        month = "July";
+        break;
+      case "08":
+        month = "August";
+        break;
+      case "09":
+        month = "September";
+        break;
+      case "10":
+        month = "October";
+        break;
+      case "11":
+        month = "November";
+        break;
+      case "12":
+        month = "December";
+        break;
+    }
+
+    text = month + " " + day + ", " + year;
+    
+    return text;
   }
-  text = month + text.slice(3);
-  return text;
+  else {
+    return("No due date")
+  }
 }
 
 export function is14DaysAgo(in_date) {
