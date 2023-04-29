@@ -1,5 +1,5 @@
 import React from "react";
-import { assignments, announcements, makeCanvasDateReadable } from "../data";
+import { announcements, makeCanvasDateReadable, sortByDate } from "../data";
 import { useAppData } from "../context/AppProvider";
 
 // This Class is for Logan
@@ -10,15 +10,24 @@ export default function Projects() {
 
   let dueDates = [];
   let annDates = [];
+  let dueDatesString = [];
 
   for(let i = 0; i < courses.length; i++){
     for(let j = 0; j < courses[i].assignments.length; j++)
-      dueDates.push(courses[i].name + " - " + courses[i].assignments[j].name + " - " + makeCanvasDateReadable(courses[i].assignments[j].due_at));
+      if(courses[i].assignments[j].due_at){
+        dueDates.push({course: courses[i].name, assn_name: courses[i].assignments[j].name, assn_date: courses[i].assignments[j].due_at.slice(0, 10)});
+      }
+      else{
+        dueDates.push({course: courses[i].name, assn_name: courses[i].assignments[j].name, assn_date: "null"});
+      }
   }
 
-  // for(let i = 0; i < assignments.length; i++){
-  //     dueDates.push(assignments[i].parent_course + " - " + assignments[i].name + " - " + toDateStringBetter(assignments[i].due_date));
-  // }
+  // Sort assisnments by ascending date
+  dueDates = sortByDate(dueDates, true);
+
+  for(let i = 0; i < dueDates.length; i++){
+      dueDatesString.push(dueDates[i].course + " - " + dueDates[i].assn_name + " - " + makeCanvasDateReadable(dueDates[i].assn_date));
+  }
 
   // for(let j = 0; j < announcements.length; j++){
   //   annDates.push(announcements[j].parent_course + " - " + announcements[j].name + " - " + makeCanvasDateReadable(announcements[j].post_date));
@@ -34,7 +43,7 @@ export default function Projects() {
           </h1>
           <ol className="px-4" style={{listStyleType: 'disc'}}>
             {
-              dueDates.map((item, index) =>
+              dueDatesString.map((item, index) =>
                 <li key={index}>{item}</li>
               )
             }
