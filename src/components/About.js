@@ -20,8 +20,6 @@ function ExampleComponent() {
         setIsLoading(true);
         setLoaded(false);
 
-        console.log("FETCHING NOW");
-
         try {
           let response = await fetch('/.netlify/functions/middleware', {
             method: 'GET',
@@ -30,11 +28,12 @@ function ExampleComponent() {
             }
           });
 
+          setIsLoading(false);
+          setLoaded(true);
+          setDisplayText(true);
+
           if (response.ok) {
             console.log("GOOD RESPONSE");
-            setDisplayText(true);
-            setIsLoading(false);
-            setLoaded(true);
             setInputValue("");
 
             let responseJson = await response.json();
@@ -42,16 +41,13 @@ function ExampleComponent() {
             onAssignmentsChange(responseJson.assignments);
           } else if (!response.ok) {
             console.log("BAD RESPONSE");
-            setDisplayText(true);
-            setIsLoading(false);
-            setLoaded(true);
             setBadLoaded(true);
 
             setTimeout(() => {
               setLoaded(false);
               setBadLoaded(false);
               setInputValue("");
-            }, 2000);
+            }, 5000);
 
           }
         } catch (error) {

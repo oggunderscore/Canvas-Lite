@@ -5,18 +5,13 @@ let myId = null;
 
 async function startFullertonAPI() {
     console.log("start fullerton API called");
-    canvasAPI = require("node-canvas-api");
     try {
         fullertonAPI = await canvasAPI.getSelf();
         myId = fullertonAPI.id;
     } catch (error) {
         console.log("AHA CAUGHT THE ERROR: " + error);
-        if (fullertonAPI == null) {
-            console.log("Dude its fucking null");
-        } else {
-            console.log("Its not null???");
-        }
-
+        if (fullertonAPI == null)
+            console.log("Dude its null");
     }
     return fullertonAPI;
 }
