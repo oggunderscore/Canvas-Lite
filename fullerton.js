@@ -10,8 +10,10 @@ async function startFullertonAPI() {
         myId = fullertonAPI.id;
     } catch (error) {
         console.log("AHA CAUGHT THE ERROR: " + error);
-        if (fullertonAPI == null)
+        if (fullertonAPI == null) {
             console.log("Dude its null");
+            return fullertonAPI;
+        }
     }
     return fullertonAPI;
 }
