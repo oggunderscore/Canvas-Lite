@@ -26,7 +26,7 @@ async function getCourses() {
 
 async function getAssignments(courseID) {
     console.log("getAssignments called");
-    assignments = await canvasAPI.getAssignments(courseID);
+    assignments = await canvasAPI.getAssignments(courseID, canvasAPI.getOptions.assignments.graded_submission_exist.false);
     return assignments;
 }
 

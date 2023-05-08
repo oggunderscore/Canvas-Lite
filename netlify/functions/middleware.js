@@ -3,14 +3,7 @@ let canvasAPI = require("node-canvas-api");
 var cors = require('cors');
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
 app.use(cors());
-app.use(bodyParser.json);
-
-// const serv = require('node:http');
-
-// serv.maxHeaderSize = 16000;
-
 
 // Define the route for the API call
 app.post('/api/myEndpoint', (req, res) => {
@@ -55,9 +48,20 @@ exports.handler = async (event, context) => {
         }
         let assignments = [];
         let keysToKeep = ["name", "id"];
+        const promises = [];
+
+        // This function waits for 1 to resolve, before starting on the next
         for (let i = 0; i < courses.length; i++) {
-            courses[i].assignments = await getAssignments(courses[i].id);
+            promises.push(getAssignments(courses[i].id)); // await statement
         }
+
+        await Promise.all(promises).then((result) => {
+            for (let i = 0; i < courses.length; i++) {
+                courses[i].assignments = result[i];
+            }
+            console.log("Result: " + result);
+        });
+
         console.log("Got Assignments.");
 
         bundle = { courses, assignments };
