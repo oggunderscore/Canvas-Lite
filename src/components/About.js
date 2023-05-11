@@ -16,56 +16,13 @@ function ExampleComponent() {
     const fetchInfo = async () => {
       if (token != '') {
         console.log("Fetching with token: " + JSON.stringify(token));
-
-        // Make it loading symbol
         setIsLoading(true);
         setLoaded(false);
-
-        // try {
-        //   const response1 = await fetch('http://localhost:8888/api/myEndpoint', {
-        //     method: 'POST',
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({ variable: token }),
-        //   });
-        //   if (response1.ok) {
-        //     console.log("RESPONSE IS OK");
-        //     let resjson = await response1.json();
-        //     console.log("RESPONSE: " + resjson);
-        //   } else {
-        //     console.log("RESPONSE NOT OK");
-        //   }
-
-
-        // } catch (error) {
-        //   console.log(error);
-        // }
 
         try {
           delete process.env.VARIABLE
           process.env.CANVAS_API_TOKEN = token;
           require('dotenv').config({ override: true })
-
-          //console.log("CANVAS_API_TOKEN (prepost): " + token);
-
-          // const postObj = url => ({
-          //   'method': 'GET',
-          //   'uri': url,
-          //   'json': true,
-          //   'resolveWithFullResponse': true,
-          //   'headers': {
-          //     'CANVAS_API_TOKEN': token
-          //   }
-          // });
-          // console.log("Calling POST Fetch...");
-
-          // const postResponse = await fetch('/.netlify/functions/middleware', postObj('/.netlify/functions/middleware'));
-          // if (postResponse.ok) {
-          //   console.log("Nice Response.");
-          // } else {
-          //   console.log("Not nice response.");
-          // }
 
           const requestObj = url => ({
             'method': 'GET',
@@ -76,7 +33,6 @@ function ExampleComponent() {
               'CANVAS_API_TOKEN': token
             }
           });
-          //console.log("REQUEST OBJ: " + JSON.stringify(requestObj('/.netlify/functions/middleware')));
 
           let response = await fetch('/.netlify/functions/middleware', requestObj('/.netlify/functions/middleware'));
 

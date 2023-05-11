@@ -5,72 +5,55 @@ const express = require('express');
 const app = express();
 app.use(cors());
 
-// Define the route for the API call
-app.post('/api/myEndpoint', (req, res) => {
-    console.log("WE GOT HERE BROS.");
-    const receivedVariable = req.body.variable; // Extract the variable from the request body
-    console.log("WE GOT HERE BROS.2");
-
-    // Pass the variable to the Node module or function where you want to use it
-    canvasAPI.processVariable(receivedVariable);
-    console.log("WE GOT HERE BROS.3");
-
-    // Send a response back to the front end
-    res.json({ message: 'Variable received successfully' });
-});
-
 // Route for handling get request for path /
 exports.handler = async (event, context) => {
 
     console.log("WE IN EXPORTS");
-    require('dotenv').config({ override: true })
 
-    //console.log("ENV: " + JSON.stringify(process.env));
-    //console.log("CANVAS_API_TOKEN: " + process.env.CANVAS_API_TOKEN);
-
-    //console.log("EVENT: " + JSON.stringify(event));
     console.log("EVENT token: " + JSON.stringify(event.headers.canvas_api_token));
 
     canvasAPI.processVariable({ variable: event.headers.canvas_api_token });
 
-    //console.log("ATTEMPTING TO START API");
     // Start the API to get your ID
-    let apiReturn = await startFullertonAPI();
-    if (apiReturn != null) {
-        console.log("API STARTED!!!");
-        courses = await getCourses();
-        console.log("Got Courses.");
-        for (let i = 0; i < courses.length; i++) {
-            if (courses[i].enrollment_term_id != 15329) {
-                courses.splice(i, 1);
-                i--;
-            }
-        }
-        let assignments = [];
-        let keysToKeep = ["name", "id"];
-        const promises = [];
-
-        // This function waits for 1 to resolve, before starting on the next
-        for (let i = 0; i < courses.length; i++) {
-            promises.push(getAssignments(courses[i].id)); // await statement
-        }
-
-        await Promise.all(promises).then((result) => {
+    try {
+        let apiReturn = await startFullertonAPI();
+        if (apiReturn != null) {
+            console.log("API STARTED!!!");
+            courses = await getCourses();
+            console.log("Got Courses.");
             for (let i = 0; i < courses.length; i++) {
-                courses[i].assignments = result[i];
+                if (courses[i].enrollment_term_id != 15329) {
+                    courses.splice(i, 1);
+                    i--;
+                }
             }
-            console.log("Result: " + result);
-        });
+            let assignments = [];
+            let keysToKeep = ["name", "id"];
+            const promises = [];
 
-        console.log("Got Assignments.");
+            // This function waits for 1 to resolve, before starting on the next
+            for (let i = 0; i < courses.length; i++) {
+                promises.push(getAssignments(courses[i].id)); // await statement
+            }
 
-        bundle = { courses, assignments };
+            await Promise.all(promises).then((result) => {
+                for (let i = 0; i < courses.length; i++) {
+                    courses[i].assignments = result[i];
+                }
+            });
+
+            console.log("Got Assignments.");
+
+            bundle = { courses, assignments };
+            return {
+                statusCode: 200,
+                body: JSON.stringify(bundle)
+            };
+        }
         return {
-            statusCode: 200,
-            body: JSON.stringify(bundle)
+            statusCode: 500,
         };
+    } catch {
+        console.log(error);
     }
-    return {
-        statusCode: 500,
-    };
 };
