@@ -6,7 +6,7 @@ export default function Experience() {
   return (
     <section id="experience">
       <div className="container px-5 py-10 mx-auto text-center">
-        <UsersIcon className="w-10 inline-block mb-4" />
+        {/* <UsersIcon className="w-10 inline-block mb-4" />
         <h1 className="sm:text-4xl text-3xl font-medium title-font text-white mb-12">
           Experience
         </h1>
@@ -23,7 +23,7 @@ export default function Experience() {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </section>
   );

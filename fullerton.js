@@ -1,20 +1,32 @@
-const canvasAPI = require("node-canvas-api");
+let canvasAPI = require("node-canvas-api");
 
 let fullertonAPI = null;
 let myId = null;
 
 async function startFullertonAPI() {
-    fullertonAPI = await canvasAPI.getSelf();
-    myId = fullertonAPI.id;
+    console.log("start fullerton API called");
+    try {
+        fullertonAPI = await canvasAPI.getSelf();
+        myId = fullertonAPI.id;
+    } catch (error) {
+        console.log("AHA CAUGHT THE ERROR: " + error);
+        if (fullertonAPI == null) {
+            console.log("Dude its null");
+            return fullertonAPI;
+        }
+    }
+    return fullertonAPI;
 }
 
 async function getCourses() {
-    const courses = await canvasAPI.getCoursesByUser(myId);
+    console.log("getCoursescalled");
+    courses = await canvasAPI.getCoursesByUser(myId);
     return courses;
 }
 
 async function getAssignments(courseID) {
-    const assignments = await canvasAPI.getAssignments(courseID);
+    console.log("getAssignments called");
+    assignments = await canvasAPI.getAssignments(courseID, canvasAPI.getOptions.assignments.graded_submission_exist.false);
     return assignments;
 }
 
