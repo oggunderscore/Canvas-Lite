@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAppData } from "../context/AppProvider";
+const fs = require('fs');
 
 
 function ExampleComponent() {
@@ -8,35 +9,75 @@ function ExampleComponent() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoaded, setLoaded] = useState(false);
   const [isBadLoaded, setBadLoaded] = useState(false);
+  let { courses, onCoursesChange, assignments, onAssignmentsChange, token, onTokenChange } = useAppData();
+
+  // useEffect = redo this function everytime something changes in the second parameter
+  useEffect(() => {
+    const fetchInfo = async () => {
+      if (token != '') {
+        console.log("Fetching with token: " + JSON.stringify(token));
+        setIsLoading(true);
+        setLoaded(false);
+
+        try {
+          delete process.env.VARIABLE
+          process.env.CANVAS_API_TOKEN = token;
+          require('dotenv').config({ override: true })
+
+          const requestObj = url => ({
+            'method': 'GET',
+            'uri': url,
+            'json': true,
+            'resolveWithFullResponse': true,
+            'headers': {
+              'CANVAS_API_TOKEN': token
+            }
+          });
+
+          let response = await fetch('/.netlify/functions/middleware', requestObj('/.netlify/functions/middleware'));
+
+          setIsLoading(false);
+          setLoaded(true);
+          setDisplayText(true);
+
+          if (response.ok) {
+            console.log("GOOD RESPONSE");
+            setInputValue("");
+
+            let responseJson = await response.json();
+            onCoursesChange(responseJson.courses);
+            onAssignmentsChange(responseJson.assignments);
+          } else if (!response.ok) {
+            console.log("BAD RESPONSE");
+            setBadLoaded(true);
+
+            setTimeout(() => {
+              setLoaded(false);
+              setBadLoaded(false);
+              setInputValue("");
+            }, 5000);
+
+          }
+        } catch (error) {
+          console.log("ERROR CAUGHT:");
+          console.log(error);
+        }
+      }
+    }
+    fetchInfo();
+  }, [token]);
+
+
 
   const handleSubmit = (event) => {
     if (inputValue === "") {
-      alert("Please enter a value!");
+      alert("Please enter a valid key!");
     } else {
       event.preventDefault();
       setIsLoading(true);
       setLoaded(false);
+      onTokenChange(inputValue); // This is where we call to useEffect and fetch a response
     }
-  
-    setTimeout(() => {
-      console.log(`Submitting input value: ${inputValue}`);
-      if (inputValue === "good") {
-        setDisplayText(true);
-      } else {
-        setDisplayText(true);
-        setBadLoaded(true);
-  
-        setTimeout(() => {
-          setLoaded(false);
-          setBadLoaded(false);
-          setInputValue("");
-        }, 2000);
-        
-      }
-  
-      setIsLoading(false);
-      setLoaded(true);
-    }, 2000);
   };
 
   const handleInputChange = (event) => {
@@ -73,11 +114,11 @@ function ExampleComponent() {
             placeholder="Enter text here"
             value={inputValue}
             onChange={handleInputChange}
-            style={{width: "275px"}}
+            style={{ width: "275px" }}
           />
           <button
             type="submit"
-            className={`bg-blue-500 text-white p-2 rounded-lg ${isLoading ? "active-button" : ""} ${(!isBadLoaded && isLoaded) ? "loaded-button" : ""} ${(isBadLoaded && isLoaded) ? "bad-button" : ""}`}
+            className={`bg-blue-500 text-white p-2 pr-4 text-center rounded-lg ${isLoading ? "active-button" : ""} ${(!isBadLoaded && isLoaded) ? "loaded-button" : ""} ${(isBadLoaded && isLoaded) ? "bad-button" : ""}`}
           >
             {isLoading && !isLoaded ? (
               <div className="flex items-center">
@@ -97,18 +138,7 @@ function ExampleComponent() {
             )}
           </button>
         </div>
-        {displayText && (
-          <p className="mt-2 text-center">{`You entered "${inputValue}" (good)`}</p>
-        )}
       </form>
-
-      <div className="pl-10 py-20">
-        <p className="flex pr-10 items-center justify-center">
-          Enter 'good' for the correct case, 'bad' for incorrect, nothing for empty.
-        </p>
-        <h1>the</h1>
-        <h2 className="pl-30">ALIGNMENT</h2>
-      </div>
     </div>
   );
 }

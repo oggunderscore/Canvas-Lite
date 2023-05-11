@@ -4,7 +4,7 @@ import { InformationCircleIcon } from "@heroicons/react/solid";
 export default function Contact() {
   return (
     <section id="contact" className="relative">
-      <div className="text-center container px-5 py-10 mx-auto ">
+      {/* <div className="text-center container px-5 py-10 mx-auto ">
           <InformationCircleIcon className="inline-block w-10 text-white mb-4" />
           <h2 className="text-center text-white sm:text-4xl text-3xl mb-1 font-medium title-font">
             Contact Me
@@ -27,7 +27,7 @@ export default function Contact() {
             </p>
             </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }
