@@ -1,5 +1,5 @@
 import React from "react";
-import { announcements, makeCanvasDateReadable, sortByDate, dateToNum } from "../data";
+import { makeCanvasDateReadable, sortByDate, dateToNum } from "../data";
 import { useAppData } from "../context/AppProvider";
 
 // This Class is for Logan

@@ -1,18 +1,3 @@
-export const announcements = [
-  {
-    id: 0,
-    parent_course: "MATH 170B",
-    name: "Exam coming up!",
-    post_date: new Date(2023, 2, 19, 0, 0, 0, 0)
-  },
-  {
-    id: 1,
-    parent_course: "CPSC 332",
-    name: "Exam 1 Study Guide",
-    post_date: new Date(2023, 2, 12, 0, 0, 0, 0)
-  }
-]
-
 export function dateToNum(date, ascending) {
   let dateNum = 0;
   if(date != "null"){
