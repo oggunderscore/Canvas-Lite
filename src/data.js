@@ -13,7 +13,7 @@ export const announcements = [
   }
 ]
 
-function dateToNum(date, ascending) {
+export function dateToNum(date, ascending) {
   let dateNum = 0;
   if(date != "null"){
     dateNum = dateNum + Number(date.slice(8, 10));
