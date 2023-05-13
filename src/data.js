@@ -1,18 +1,3 @@
-export const announcements = [
-  {
-    id: 0,
-    parent_course: "MATH 170B",
-    name: "Exam coming up!",
-    post_date: new Date(2023, 2, 19, 0, 0, 0, 0)
-  },
-  {
-    id: 1,
-    parent_course: "CPSC 332",
-    name: "Exam 1 Study Guide",
-    post_date: new Date(2023, 2, 12, 0, 0, 0, 0)
-  }
-]
-
 export function dateToNum(date, ascending) {
   let dateNum = 0;
   if(date != "null"){
@@ -120,40 +105,3 @@ export function makeCanvasDateReadable(in_date) {
     return("No due date")
   }
 }
-
-export function is14DaysAgo(in_date) {
-  
-}
-
-export const experience = [
-  {
-    id: 0,
-    quote:
-      ["Validated silicon through various factors such as voltage, temperature, and workload in order to optimize power, reliability, and performance",
-      "Interacted with EEPROM, UFS, QSPI, UART, PCB Board Design, Power Management", 
-      "Debugged hardware, software, and kernel-level issues",
-      "Developed automated internal tools in Python to build efficient workflows",
-      "Presented detailed analysis reports with deep understanding of Hardware and Firmware interactions",],
-    name: "Vehicle Hardware Engineering Intern - Tesla Autopilot Team",
-    term: "August 2022 - December 2022",
-  },
-  {
-    id: 1,
-    quote:
-      ["Resolved technical problems within hardware, software, and network configurations", 
-      "Demonstrated excellent communicative skills with clients to troubleshoot issues on-site", 
-      "Professionally documented tickets in a detailed and organized manner",
-      "Interfaced with correcting errors within MySQL and SQLite databases",],
-    name: "Information Systems Service Desk L1 Analyst",
-    term: "September 2021 - August 2022",
-  },
-];
-
-export const skills = [
-  "Python",
-  "C++",
-  "JavaScript",
-  "Node & React",
-  "Linux",
-  "Git & Bash",
-];
